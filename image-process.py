@@ -1,0 +1,21 @@
+import cv2
+import numpy as np
+img=cv2.imread('6.jpg')
+gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+cv2.imwrite('gray.jpg',gray)
+ret,thresh1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+print(ret)
+cv2.imwrite('bin.jpg',thresh1)
+kernel = np.ones((5,5),np.float32)/25
+dst = cv2.filter2D(img,-1,kernel)
+cv2.imwrite('filter.jpg',dst)
+blur = cv2.blur(img,(5,5))
+cv2.imwrite('f_blur.jpg',blur)
+gblur = cv2.GaussianBlur(img,(5,5),0)
+cv2.imwrite('f_gblur.jpg',gblur)
+median = cv2.medianBlur(img,5)
+cv2.imwrite('f_median.jpg',median)
+erosion = cv2.erode(img,kernel,iterations = 1)
+cv2.imwrite('erode.jpg',erosion)
+dilation = cv2.dilate(img,kernel,iterations = 1)
+cv2.imwrite('dilate.jpg',dilation)
